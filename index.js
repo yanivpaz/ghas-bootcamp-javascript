@@ -1,4 +1,4 @@
-var chownr = require('chownr') 
+var chownr = require('chownr')
 var tar = require('tar-stream')
 var pump = require('pump')
 var mkdirp = require('mkdirp')
