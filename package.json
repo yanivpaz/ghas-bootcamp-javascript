@@ -5,7 +5,7 @@
   "dependencies": {
     "chownr": "^2.0.0",
     "mkdirp": "^0.5.1",
-    "pump": "^1.0.0",
+    "pump": "^3.0.0",
     "tar-stream": "^3.1.6"
   },
   "keywords": [
@@ -19,6 +19,7 @@
   "devDependencies": {
     "rimraf": "^5.0.5",
     "standard": "^4.5.4",
+
     "tape": "^5.7.0"
   },
   "scripts": {
