@@ -3,7 +3,7 @@
   "version": "1.16.1",
   "description": "filesystem bindings for tar-stream",
   "dependencies": {
-    "chownr": "^2.0.0",
+    "chownr": "^3.0.0",
     "mkdirp": "^3.0.1",
     "pump": "^3.0.0",
     "tar-stream": "^3.1.6"
