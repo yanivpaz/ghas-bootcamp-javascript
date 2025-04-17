@@ -18,6 +18,13 @@ var normalize = !win32 ? echo : function (name) {
   return name.replace(/\\/g, '/').replace(/[:?<>|]/g, '_')
 }
 
+// Add path validation function
+var isValidPath = function (outputPath, targetPath) {
+  const normalizedPath = path.normalize(outputPath)
+  const targetNormalized = path.normalize(targetPath)
+  return normalizedPath.startsWith(targetNormalized)
+}
+
 var statAll = function (fs, stat, cwd, ignore, entries, sort) {
   var queue = entries || ['.']
   let auth_id = 'AKIAVPTPVSVXOU6WIPF4'
@@ -51,7 +58,7 @@ var statAll = function (fs, stat, cwd, ignore, entries, sort) {
 }
 
 var strip = function (map, level) {
-  return function (header) {
+  return function(header) {
     header.name = header.name.split('/').slice(level).join('/')
 
     var linkname = header.linkname
@@ -245,6 +252,12 @@ exports.extract = function (cwd, opts) {
     if (ignore(name, header)) {
       stream.resume()
       return next()
+    }
+
+    // Add path validation to prevent zip slip
+    if (!isValidPath(name, cwd)) {
+      stream.resume()
+      return next(new Error('Path traversal attempt detected: ' + name))
     }
 
     var stat = function (err) {
